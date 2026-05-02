@@ -31,11 +31,14 @@ jobs:
       - name: Test
         run: npm run test
 
+      - name: Coverage gate
+        run: npm run test:coverage
+
       - name: Build
         run: npm run build
 
   backend:
-    name: Backend Sanity
+    name: Backend Quality
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -59,3 +62,6 @@ jobs:
 
       - name: App import smoke test
         run: python -c "from app.main import create_app; app = create_app(); print(app.title)"
+
+      - name: Backend tests
+        run: pytest -q
